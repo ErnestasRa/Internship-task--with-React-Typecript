@@ -1,6 +1,6 @@
 type CountryType = {
-    name?: string,
-    area?: number,
-    independent?: boolean,
-    region?: string,
+    name: string,
+    area: number,
+    independent: boolean,
+    region: string,
 };

@@ -8,5 +8,5 @@ const App: React.FC = () => (
       <Route path="/" element={<MainPage />} />
     </Routes>
   </BrowserRouter>
-  );
+);
 export default App;
