@@ -1,14 +1,16 @@
 import * as React from 'react';
-import { Container, Paper, Box } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 import get from 'functions/http';
+import BasicTable from 'components/table-component';
 
 const MainPage: React.FC = () => {
-  const { REACT_APP_API_ADDRESS } = process.env;
-  const [countryData, setCountryData] = React.useState<string[]>([]);
+  const { REACT_APP_API_URL } = process.env;
+  const [countryData, setCountryData] = React.useState<CountryType[]>([]);
 
   const fetchAPIData = async () => {
-    const res = await get(REACT_APP_API_ADDRESS);
-    setCountryData(res);
+    const res = await get(REACT_APP_API_URL);
+    if (res !== undefined) setCountryData(res);
+    else throw new Error('no cities found');
   };
 
   React.useEffect(() => {
@@ -18,7 +20,7 @@ const MainPage: React.FC = () => {
   return (
     <Container>
       <Paper>
-        <Box>MainPage</Box>
+        <BasicTable countryData={countryData} />
       </Paper>
     </Container>
   );
