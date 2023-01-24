@@ -7,8 +7,8 @@ import BasicSelect from 'components/select-component';
 const MainPage: React.FC = () => {
   const { REACT_APP_API_URL } = process.env;
   const [countryData, setCountryData] = React.useState<CountryType[]>([]);
-  const [selectedValue, setSelectedValue] = React.useState('a-z');
   const [sortedCities, setSortedCities] = React.useState<CountryType[]>([]);
+  const [selectedValue, setSelectedValue] = React.useState<string>('a-z');
 
   const fetchAPIData = async () => {
     const res = await get(REACT_APP_API_URL);
@@ -23,13 +23,16 @@ const MainPage: React.FC = () => {
 
   React.useEffect(() => {
     fetchAPIData();
-    sortCitiesAlphabetically();
   }, []);
 
   return (
     <Container>
       <Paper>
-        <BasicSelect selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+        <BasicSelect
+          selectedValue={selectedValue}
+          setSelectedValue={setSelectedValue}
+          sortCitiesAlphabetically={() => sortCitiesAlphabetically()}
+        />
         <BasicTable countryData={selectedValue === 'a-z' ? countryData : sortedCities} />
       </Paper>
     </Container>

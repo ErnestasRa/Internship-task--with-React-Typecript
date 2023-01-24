@@ -7,13 +7,18 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type BasicSelectType = {
   selectedValue: string;
-  setSelectedValue: any;
+  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+  sortCitiesAlphabetically: VoidFunction;
 };
 
-const BasicSelect: React.FC<BasicSelectType> = ({ setSelectedValue, selectedValue }) => {
+const BasicSelect: React.FC<BasicSelectType> = ({
+  setSelectedValue,
+  selectedValue,
+  sortCitiesAlphabetically,
+}) => {
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedValue(event.target.value as string);
-    console.log(selectedValue);
+    sortCitiesAlphabetically();
   };
 
   return (
