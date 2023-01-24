@@ -5,11 +5,20 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-const BasicFilter = () => {
-  const [age, setAge] = React.useState('');
+type BasicFilterType = {
+  selectedFilterValue: string;
+  setSelectedFilterValue: React.Dispatch<React.SetStateAction<string>>;
+  filterCitiesByArea: VoidFunction;
+};
 
+const BasicFilter: React.FC<BasicFilterType> = ({
+  selectedFilterValue,
+  setSelectedFilterValue,
+  filterCitiesByArea,
+}) => {
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setSelectedFilterValue(event.target.value as string);
+    filterCitiesByArea();
   };
 
   return (
@@ -19,12 +28,13 @@ const BasicFilter = () => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={selectedFilterValue}
           label="Age"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Smaller than LT</MenuItem>
-          <MenuItem value={20}>Are in Oceania</MenuItem>
+          <MenuItem value="0">None</MenuItem>
+          <MenuItem value="10">Smaller than LT</MenuItem>
+          <MenuItem value="20">Are in Oceania</MenuItem>
         </Select>
       </FormControl>
     </Box>

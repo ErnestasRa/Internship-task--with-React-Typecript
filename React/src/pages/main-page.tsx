@@ -10,6 +10,8 @@ const MainPage: React.FC = () => {
   const [countryData, setCountryData] = React.useState<CountryType[]>([]);
   const [sortedCities, setSortedCities] = React.useState<CountryType[]>([]);
   const [selectedValue, setSelectedValue] = React.useState<string>('a-z');
+  const [filteredCitiesByArea, setFilteredCitiesByArea] = React.useState<CountryType[]>([]);
+  const [selectedFilterValue, setSelectedFilterValue] = React.useState<string>('0');
 
   const fetchAPIData = async () => {
     const res = await get(REACT_APP_API_URL);
@@ -26,6 +28,13 @@ const MainPage: React.FC = () => {
     setSortedCities(sortCitiesFunction);
   };
 
+  const filterCitiesByArea = () => {
+    const filteredCitiesFunction = [...countryData]
+      .filter((city) => city.area < 65300)
+      .sort((a, b) => b.area - a.area);
+    setFilteredCitiesByArea(filteredCitiesFunction);
+  };
+
   React.useEffect(() => {
     fetchAPIData();
   }, []);
@@ -33,17 +42,22 @@ const MainPage: React.FC = () => {
   return (
     <Container sx={{ mt: '3vh' }}>
       <Paper>
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <Box className="selectors">
           <BasicSelect
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
             sortCitiesAlphabetically={() => sortCitiesAlphabetically()}
           />
-          <BasicFilter />
+          <BasicFilter
+            selectedFilterValue={selectedFilterValue}
+            setSelectedFilterValue={setSelectedFilterValue}
+            filterCitiesByArea={() => filterCitiesByArea()}
+          />
         </Box>
-        <BasicTable countryData={selectedValue === 'a-z' ? countryData : sortedCities} />
+        {selectedValue === 'a-z' ?? <BasicTable countryData={countryData} />}
       </Paper>
     </Container>
   );
 };
 export default MainPage;
+// finish doing conditional rendering

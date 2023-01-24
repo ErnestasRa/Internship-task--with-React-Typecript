@@ -17,8 +17,8 @@ const BasicTable: React.FC<BasicTableType> = ({ countryData }) => (
       <TableHead>
         <TableRow>
           <TableCell>Countries:</TableCell>
-          <TableCell align="right">Continent</TableCell>
           <TableCell align="right">Region</TableCell>
+          <TableCell align="right">Area</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -27,8 +27,8 @@ const BasicTable: React.FC<BasicTableType> = ({ countryData }) => (
             <TableCell component="th" scope="row">
               {row.name}
             </TableCell>
-            <TableCell align="right">{row.name}</TableCell>
             <TableCell align="right">{row.region}</TableCell>
+            <TableCell align="right">{row.area}</TableCell>
           </TableRow>
         ))}
       </TableBody>
