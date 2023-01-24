@@ -7,6 +7,7 @@ import get from 'functions/http';
 
 const MainPage: React.FC = () => {
   const { REACT_APP_API_URL } = process.env;
+  const AREA_OF_LITHUANIA: number = 65300;
   const [countryData, setCountryData] = React.useState<CountryType[]>([]);
   const [sortedCities, setSortedCities] = React.useState<CountryType[]>([]);
   const [selectedValue, setSelectedValue] = React.useState<string>('a-z');
@@ -31,7 +32,7 @@ const MainPage: React.FC = () => {
 
   const filterCitiesByArea = () => {
     const filteredCitiesFunction = [...countryData]
-      .filter((city) => city.area < 65300)
+      .filter((city) => city.area < AREA_OF_LITHUANIA)
       .sort((a, b) => b.area - a.area);
     setFilteredCitiesByArea(filteredCitiesFunction);
   };
