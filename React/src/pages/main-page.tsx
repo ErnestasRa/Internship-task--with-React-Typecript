@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Container, Paper } from '@mui/material';
+import { Container, Paper, Box } from '@mui/material';
 import get from 'functions/http';
 import BasicTable from 'components/table-component';
 import BasicSelect from 'components/select-component';
+import BasicFilter from 'components/filter-component';
 
 const MainPage: React.FC = () => {
   const { REACT_APP_API_URL } = process.env;
@@ -30,13 +31,16 @@ const MainPage: React.FC = () => {
   }, []);
 
   return (
-    <Container>
+    <Container sx={{ mt: '3vh' }}>
       <Paper>
-        <BasicSelect
-          selectedValue={selectedValue}
-          setSelectedValue={setSelectedValue}
-          sortCitiesAlphabetically={() => sortCitiesAlphabetically()}
-        />
+        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+          <BasicSelect
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+            sortCitiesAlphabetically={() => sortCitiesAlphabetically()}
+          />
+          <BasicFilter />
+        </Box>
         <BasicTable countryData={selectedValue === 'a-z' ? countryData : sortedCities} />
       </Paper>
     </Container>
