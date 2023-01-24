@@ -69,4 +69,3 @@ const MainPage: React.FC = () => {
   );
 };
 export default MainPage;
-// finish doing conditional rendering
