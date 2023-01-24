@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Container, Paper, Box } from '@mui/material';
-import get from 'functions/http';
 import BasicTable from 'components/table-component';
 import BasicSelect from 'components/select-component';
 import BasicFilter from 'components/filter-component';
+import get from 'functions/http';
 
 const MainPage: React.FC = () => {
   const { REACT_APP_API_URL } = process.env;
@@ -11,6 +11,7 @@ const MainPage: React.FC = () => {
   const [sortedCities, setSortedCities] = React.useState<CountryType[]>([]);
   const [selectedValue, setSelectedValue] = React.useState<string>('a-z');
   const [filteredCitiesByArea, setFilteredCitiesByArea] = React.useState<CountryType[]>([]);
+  const [filteredByOceania, setFilteredByOceania] = React.useState<CountryType[]>([]);
   const [selectedFilterValue, setSelectedFilterValue] = React.useState<string>('0');
 
   const fetchAPIData = async () => {
@@ -35,6 +36,11 @@ const MainPage: React.FC = () => {
     setFilteredCitiesByArea(filteredCitiesFunction);
   };
 
+  const filterAreaInOceania = () => {
+    const filteredOceaniaRegion = [...countryData].filter((city) => city.region.includes('Oceania'));
+    setFilteredByOceania(filteredOceaniaRegion);
+  };
+
   React.useEffect(() => {
     fetchAPIData();
   }, []);
@@ -51,10 +57,13 @@ const MainPage: React.FC = () => {
           <BasicFilter
             selectedFilterValue={selectedFilterValue}
             setSelectedFilterValue={setSelectedFilterValue}
-            filterCitiesByArea={() => filterCitiesByArea()}
+            filterCitiesByArea={() => [filterCitiesByArea(), filterAreaInOceania()]}
           />
         </Box>
-        {selectedValue === 'a-z' ?? <BasicTable countryData={countryData} />}
+        {selectedFilterValue === '10' && <BasicTable countryData={filteredCitiesByArea} />}
+        {selectedFilterValue === '20' && <BasicTable countryData={filteredByOceania} />}
+        {selectedValue === 'a-z' && <BasicTable countryData={countryData} />}
+        {selectedValue === 'z-a' && <BasicTable countryData={sortedCities} />}
       </Paper>
     </Container>
   );
