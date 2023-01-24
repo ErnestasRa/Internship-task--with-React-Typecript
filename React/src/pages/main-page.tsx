@@ -17,7 +17,11 @@ const MainPage: React.FC = () => {
   };
 
   const sortCitiesAlphabetically = () => {
-    const sortCitiesFunction = countryData.reverse();
+    const sortCitiesFunction = [...countryData].sort((a, b) => {
+      if (a.name > b.name) return -1;
+      if (a.name < b.name) return 1;
+      return 0;
+    });
     setSortedCities(sortCitiesFunction);
   };
 
