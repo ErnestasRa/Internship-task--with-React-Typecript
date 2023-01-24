@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Container, Paper, Box } from '@mui/material';
-import BasicTable from 'components/table-component';
 import BasicSelect from 'components/select-component';
 import BasicFilter from 'components/filter-component';
+import TableWithPagination from 'components/table-component';
 import get from 'functions/http';
 
 const MainPage: React.FC = () => {
@@ -61,10 +61,10 @@ const MainPage: React.FC = () => {
             filterCitiesByArea={() => [filterCitiesByArea(), filterAreaInOceania()]}
           />
         </Box>
-        {selectedFilterValue === '10' && <BasicTable countryData={filteredCitiesByArea} />}
-        {selectedFilterValue === '20' && <BasicTable countryData={filteredByOceania} />}
-        {selectedValue === 'a-z' && <BasicTable countryData={countryData} />}
-        {selectedValue === 'z-a' && <BasicTable countryData={sortedCities} />}
+        {selectedFilterValue === '10' && <TableWithPagination countryData={filteredCitiesByArea} />}
+        {selectedFilterValue === '20' && <TableWithPagination countryData={filteredByOceania} />}
+        {selectedValue === 'a-z' && <TableWithPagination countryData={countryData} />}
+        {selectedValue === 'z-a' && <TableWithPagination countryData={sortedCities} />}
       </Paper>
     </Container>
   );
