@@ -62,6 +62,12 @@ const MainPage: React.FC = () => {
           />
         </Box>
         {(() => {
+          if (selectedValue === 'z-a' && selectedFilterValue === '10') {
+            return <TableWithPagination countryData={filteredCitiesByArea} />;
+          }
+          if (selectedValue === 'z-a' && selectedFilterValue === '20') {
+            return <TableWithPagination countryData={filteredByOceania} />;
+          }
           if (selectedValue === 'z-a') {
             return <TableWithPagination countryData={sortedCities} />;
           }
