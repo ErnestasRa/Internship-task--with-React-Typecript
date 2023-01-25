@@ -61,10 +61,18 @@ const MainPage: React.FC = () => {
             filterCitiesByArea={() => [filterCitiesByArea(), filterAreaInOceania()]}
           />
         </Box>
-        {selectedFilterValue === '10' && <TableWithPagination countryData={filteredCitiesByArea} />}
-        {selectedFilterValue === '20' && <TableWithPagination countryData={filteredByOceania} />}
-        {selectedValue === 'a-z' && <TableWithPagination countryData={countryData} />}
-        {selectedValue === 'z-a' && <TableWithPagination countryData={sortedCities} />}
+        {(() => {
+          if (selectedValue === 'z-a') {
+            return <TableWithPagination countryData={sortedCities} />;
+          }
+          if (selectedFilterValue === '10') {
+            return <TableWithPagination countryData={filteredCitiesByArea} />;
+          }
+          if (selectedFilterValue === '20') {
+            return <TableWithPagination countryData={filteredByOceania} />;
+          }
+          return <TableWithPagination countryData={countryData} />;
+        })()}
       </Paper>
     </Container>
   );
