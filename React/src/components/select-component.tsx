@@ -28,7 +28,7 @@ const BasicSelect: React.FC<BasicSelectType> = ({
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={selectedValue}
-          label="Age"
+          label="Select"
           onChange={handleChange}
         >
           <MenuItem value="a-z">A-Z</MenuItem>

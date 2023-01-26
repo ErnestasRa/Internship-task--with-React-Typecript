@@ -29,7 +29,7 @@ const BasicFilter: React.FC<BasicFilterType> = ({
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={selectedFilterValue}
-          label="Age"
+          label="Filter"
           onChange={handleChange}
         >
           <MenuItem value="0">None</MenuItem>
